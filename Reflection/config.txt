@@ -1,4 +1,7 @@
-Setting1 = Value1
+﻿Setting1 = Value1
 Setting2 = Value2
 Setting3 = Value3
-MySetting = New file's value
+StringSetting = New file's value N3
+IntSetting = 56
+FloatSetting = 5.643
+TimeSpanSetting = -10675199.02:48:05.4775808

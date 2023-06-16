@@ -2,34 +2,61 @@
 
 class Program : ConfigurationComponentBase
 {
-    [FileConfigurationItem("MySetting")]
-    public string MyFileSetting { get; set; }
-
-    [ConfigurationManagerConfigurationItem("MySetting")]
-    public string MyConfigurationManagerSetting { get; set; }
 
     public Program()
     {
-        MyFileSetting = string.Empty;
-        MyConfigurationManagerSetting = string.Empty;
+        Settings = new ProgramSettings();
     }
-
 
     static void Main()
     {
-        var program = new Program();
+        var program = new Program
+        {
+            Settings = new ProgramSettings()
+        };
 
         // Загрузка настроек
         program.LoadSettings();
 
-        Console.WriteLine("MyFileSetting value: " + program.MyFileSetting);
-        Console.WriteLine("MyConfigurationManagerSetting value: " + program.MyConfigurationManagerSetting);
+        Console.WriteLine("Before saving setting:");
+        Console.WriteLine("MyFileStringSetting value: " + program.Settings.MyFileStringSetting.Value);
+        Console.WriteLine("MyConfigurationManagerStringSetting value: " + program.Settings.MyConfigurationManagerStringSetting.Value);
+
+        Console.WriteLine("MyFileIntSetting value: " + program.Settings.MyFileIntSetting.Value);
+        Console.WriteLine("MyConfigurationManagerIntSetting value: " + program.Settings.MyConfigurationManagerIntSetting.Value);
+
+        Console.WriteLine("MyFileFloatSetting value: " + program.Settings.MyFileFloatSetting.Value);
+        Console.WriteLine("MyConfigurationManagerFloatSetting value: " + program.Settings.MyConfigurationManagerFloatSetting.Value);
+
+        Console.WriteLine("MyFileTimeSpanSetting value: " + program.Settings.MyFileTimeSpanSetting.Value);
+        Console.WriteLine("MyConfigurationManagerTimeSpanSetting value: " + program.Settings.MyConfigurationManagerTimeSpanSetting.Value);
+
 
         // Изменение настроек
-        program.MyFileSetting = "New file's value";
-        program.MyConfigurationManagerSetting = "New ConfigurationManager's value";
+        program.Settings.MyFileStringSetting.Value = "New file's value N3";
+        program.Settings.MyConfigurationManagerStringSetting.Value = "New ConfigurationManager's value N3";
+        program.Settings.MyFileIntSetting.Value = 56;
+        program.Settings.MyConfigurationManagerIntSetting.Value = 64;
+        program.Settings.MyFileFloatSetting.Value = 5.643f;
+        program.Settings.MyConfigurationManagerFloatSetting.Value = 3.53f;
+        program.Settings.MyFileTimeSpanSetting.Value = TimeSpan.MinValue;
+        program.Settings.MyConfigurationManagerTimeSpanSetting.Value = TimeSpan.MaxValue;
 
         // Сохранение настроек
-        program.SaveSettings();
+        program.SaveSettings(); 
+        
+        Console.WriteLine("After saving setting:");
+        Console.WriteLine("MyFileStringSetting value: " + program.Settings.MyFileStringSetting.Value);
+        Console.WriteLine("MyConfigurationManagerStringSetting value: " + program.Settings.MyConfigurationManagerStringSetting.Value);
+
+        Console.WriteLine("MyFileIntSetting value: " + program.Settings.MyFileIntSetting.Value);
+        Console.WriteLine("MyConfigurationManagerIntSetting value: " + program.Settings.MyConfigurationManagerIntSetting.Value);
+
+        Console.WriteLine("MyFileFloatSetting value: " + program.Settings.MyFileFloatSetting.Value);
+        Console.WriteLine("MyConfigurationManagerFloatSetting value: " + program.Settings.MyConfigurationManagerFloatSetting.Value);
+
+        Console.WriteLine("MyFileTimeSpanSetting value: " + program.Settings.MyFileTimeSpanSetting.Value);
+        Console.WriteLine("MyConfigurationManagerTimeSpanSetting value: " + program.Settings.MyConfigurationManagerTimeSpanSetting.Value);
+
     }
 }

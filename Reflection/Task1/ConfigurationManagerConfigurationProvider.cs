@@ -1,31 +1,58 @@
-﻿using System.Configuration;
+﻿
+using System;
+using System.Configuration;
+using System.IO;
+using Reflection.Task1.interfaces;
 
 namespace Reflection.Task1
 {
     public class ConfigurationManagerConfigurationProvider : IConfigurationProvider
     {
-        public object? GetSetting(string settingName)
-        {
-            // Чтение значения настройки из ConfigurationManager
-            string? settingValue = ConfigurationManager.AppSettings[settingName];
-            return settingValue != null ? (object?)settingValue : null;
-        }
+        private readonly string configFilePath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\..\\App.config"));
 
-        public void SetSetting(string settingName, object value)
+        public GenericSetting<T> GetSetting<T>(string settingName)
         {
-            string configFilePath = "C:\\EPAM\\C#\\.NET Mentoring Program Basics 2023\\Reflection\\Reflection\\App.config";
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            ExeConfigurationFileMap configFileMap = new()
+            {
+                ExeConfigFilename = configFilePath
+            };
+
+            Configuration config = ConfigurationManager.OpenMappedExeConfiguration(configFileMap, ConfigurationUserLevel.None);
 
             var settings = config.AppSettings.Settings;
 
             if (settings[settingName] != null)
             {
-                settings[settingName].Value = value.ToString();
+                string? settingValue = settings[settingName].Value;
+                T? value = settingValue != null ? (T)Convert.ChangeType(settingValue, typeof(T)) : default;
+                return new GenericSetting<T>(typeof(T) + "Setting") { Value = value };
+            }
+            else
+            {
+                Console.WriteLine($"Setting '{settingName}' not found in the configuration file.");
+                return null; // Возвращаем null или выбрасываем исключение в зависимости от требований
+            }
+        }
+
+        public void SetSetting<T>(string settingName, T value)
+        {
+            ExeConfigurationFileMap configFileMap = new()
+            {
+                ExeConfigFilename = configFilePath
+            };
+
+            Configuration config = ConfigurationManager.OpenMappedExeConfiguration(configFileMap, ConfigurationUserLevel.None);
+
+            var settings = config.AppSettings.Settings;
+
+            if (settings[settingName] != null)
+            {
+                string? settingValue = value != null ? value.ToString() : string.Empty;
+                settings[settingName].Value = settingValue;
                 try
                 {
-                    //config.Save(ConfigurationSaveMode.Modified);
-                    //ConfigurationManager.RefreshSection("appSettings");
-                    config.SaveAs(configFilePath, ConfigurationSaveMode.Modified);
+                    config.Save(ConfigurationSaveMode.Modified);
+                    ConfigurationManager.RefreshSection("appSettings");
                     Console.WriteLine("The settings have been successfully saved.");
                 }
                 catch (Exception ex)
@@ -35,11 +62,8 @@ namespace Reflection.Task1
             }
             else
             {
-                // Обработка случая, когда настройка не найдена
-                // Можно выбросить исключение или выполнить другие действия
                 Console.WriteLine($"Setting '{settingName}' not found in the configuration file.");
             }
         }
-
     }
 }

@@ -1,6 +1,4 @@
-﻿
-
-namespace Reflection.Task1
+﻿namespace Reflection.Task1.configurationAttributes
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class ConfigurationManagerConfigurationItemAttribute : ConfigurationItemAttribute
