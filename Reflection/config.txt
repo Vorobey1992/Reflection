@@ -1,7 +1,7 @@
 ﻿Setting1 = Value1
 Setting2 = Value2
 Setting3 = Value3
-StringSetting = New ConfigurationManager's value N4
-IntSetting = 641
-FloatSetting = 31.53
-TimeSpanSetting = 14:14:14
+StringSetting = New file's value N4
+IntSetting = 561
+FloatSetting = 51.643
+TimeSpanSetting = 16:16:16
