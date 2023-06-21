@@ -1,8 +1,5 @@
-﻿
-using System;
+﻿using Reflection.Task1.interfaces;
 using System.Configuration;
-using System.IO;
-using Reflection.Task1.interfaces;
 
 namespace Reflection.Task1
 {
@@ -24,8 +21,25 @@ namespace Reflection.Task1
             if (settings[settingName] != null)
             {
                 string? settingValue = settings[settingName].Value;
-                T? value = settingValue != null ? (T)Convert.ChangeType(settingValue, typeof(T)) : default;
-                return new GenericSetting<T>(typeof(T) + "Setting") { Value = value };
+                T? value = default;
+
+                if (settingValue != null && typeof(T) == typeof(TimeSpan))
+                {
+                    if (TimeSpan.TryParse(settingValue, out var timeSpanValue))
+                    {
+                        value = (T)(object)timeSpanValue;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Invalid value for setting '{settingName}': {settingValue}");
+                    }
+                }
+                else
+                {
+                    value = settingValue != null ? (T)Convert.ChangeType(settingValue, typeof(T)) : default;
+                }
+
+                return new GenericSetting<T>(settingName) { Value = value };
             }
             else
             {

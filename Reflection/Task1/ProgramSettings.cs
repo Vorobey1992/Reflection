@@ -9,7 +9,7 @@ namespace Reflection.Task1
 
         [ConfigurationManagerConfigurationItem("StringSetting")]
         public GenericSetting<string> MyConfigurationManagerStringSetting { get; set; }
-        
+
         [FileConfigurationItem("IntSetting")]
         public GenericSetting<int> MyFileIntSetting { get; set; }
 

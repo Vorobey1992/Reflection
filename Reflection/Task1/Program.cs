@@ -10,10 +10,7 @@ class Program : ConfigurationComponentBase
 
     static void Main()
     {
-        var program = new Program
-        {
-            Settings = new ProgramSettings()
-        };
+        Program program = new();
 
         // Загрузка настроек
         program.LoadSettings();
@@ -33,14 +30,14 @@ class Program : ConfigurationComponentBase
 
 
         // Изменение настроек
-        program.Settings.MyFileStringSetting.Value = "New file's value N3";
-        program.Settings.MyConfigurationManagerStringSetting.Value = "New ConfigurationManager's value N3";
-        program.Settings.MyFileIntSetting.Value = 56;
-        program.Settings.MyConfigurationManagerIntSetting.Value = 64;
-        program.Settings.MyFileFloatSetting.Value = 5.643f;
-        program.Settings.MyConfigurationManagerFloatSetting.Value = 3.53f;
-        program.Settings.MyFileTimeSpanSetting.Value = TimeSpan.MinValue;
-        program.Settings.MyConfigurationManagerTimeSpanSetting.Value = TimeSpan.MaxValue;
+        program.Settings.MyFileStringSetting.Value = "New file's value N4";
+        program.Settings.MyConfigurationManagerStringSetting.Value = "New ConfigurationManager's value N4";
+        program.Settings.MyFileIntSetting.Value = 561;
+        program.Settings.MyConfigurationManagerIntSetting.Value = 641;
+        program.Settings.MyFileFloatSetting.Value = 51.643f;
+        program.Settings.MyConfigurationManagerFloatSetting.Value = 31.53f;
+        program.Settings.MyFileTimeSpanSetting.Value = TimeSpan.Parse("16:16:16");
+        program.Settings.MyConfigurationManagerTimeSpanSetting.Value = TimeSpan.Parse("14:14:14");
 
         // Сохранение настроек
         program.SaveSettings(); 

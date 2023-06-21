@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reflection", "Reflection\Reflection.csproj", "{E33D2816-C07A-4EE3-A07D-5D0E1C8D9F2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reflection", "Reflection\Reflection.csproj", "{E33D2816-C07A-4EE3-A07D-5D0E1C8D9F2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileConfigurationProvider", "Reflection\Scripts\FileConfigurationProvider\FileConfigurationProvider.csproj", "{B1EB1259-F27C-43A3-9CC0-D9080F55BFDC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigurationManagerConfigurationProvider", "Reflection\Scripts\ConfigurationManagerConfigurationProvider\ConfigurationManagerConfigurationProvider.csproj", "{7CB541F5-3518-450D-ADC6-640D1CDB5EDB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{E33D2816-C07A-4EE3-A07D-5D0E1C8D9F2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E33D2816-C07A-4EE3-A07D-5D0E1C8D9F2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E33D2816-C07A-4EE3-A07D-5D0E1C8D9F2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1EB1259-F27C-43A3-9CC0-D9080F55BFDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1EB1259-F27C-43A3-9CC0-D9080F55BFDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1EB1259-F27C-43A3-9CC0-D9080F55BFDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1EB1259-F27C-43A3-9CC0-D9080F55BFDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CB541F5-3518-450D-ADC6-640D1CDB5EDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CB541F5-3518-450D-ADC6-640D1CDB5EDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CB541F5-3518-450D-ADC6-640D1CDB5EDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CB541F5-3518-450D-ADC6-640D1CDB5EDB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

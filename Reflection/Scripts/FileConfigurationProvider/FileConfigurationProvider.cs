@@ -1,6 +1,5 @@
-﻿
+﻿using Reflection.Task1.interfaces;
 using System.Text;
-using Reflection.Task1.interfaces;
 
 namespace Reflection.Task1
 {
@@ -22,8 +21,8 @@ namespace Reflection.Task1
                         {
                             string value = parts[1].Trim();
 
-                            T settingValue = ParseSettingValue<T>(value);
-                            return new GenericSetting<T>(typeof(T)+ "Setting") { Value = settingValue };
+                            T settingValue = ParseSettingValue<T>(value.Trim());
+                            return new GenericSetting<T>(settingName) { Value = settingValue };
                         }
                     }
                 }
@@ -46,6 +45,13 @@ namespace Reflection.Task1
             try
             {
                 string settingValue = value?.ToString() ?? string.Empty;
+
+                if (typeof(T) == typeof(TimeSpan))
+                {
+                    TimeSpan timeSpanValue = (TimeSpan)(object)value;
+                    settingValue = timeSpanValue.ToString(); // Используйте стандартное форматирование TimeSpan
+                }
+
                 string[] lines = File.Exists(filePath) ? File.ReadAllLines(filePath) : Array.Empty<string>();
                 bool settingExists = false;
 
@@ -101,7 +107,10 @@ namespace Reflection.Task1
             }
             else if (valueType == typeof(TimeSpan))
             {
-                return (T)(object)TimeSpan.Parse(value);
+                if (TimeSpan.TryParse(value, out TimeSpan timeSpanValue))
+                {
+                    return (T)(object)timeSpanValue;
+                }
             }
 
             throw new NotSupportedException($"Unsupported setting type: {typeof(T).FullName}");
